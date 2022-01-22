@@ -4,6 +4,15 @@
   "description": "An IPFS cluster HTTP client for node.js",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:cyphercider/ifps-cluster-http-client.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT",
   "scripts": {
     "prepublish": "npm run build:release",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
@@ -13,7 +22,6 @@
     "test:report": "sensible-browser ./coverage/lcov-report/index.html",
     "clean": "rm -rf dist"
   },
-  "license": "MIT",
   "devDependencies": {
     "@ipld/car": "^3.2.3",
     "@ipld/dag-cbor": "^7.0.0",
@@ -37,16 +45,13 @@
     "typescript": "^4.5.5",
     "uvu": "^0.5.3"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:cyphercider/ifps-cluster-http-client.git"
-  },
   "keywords": [
     "ipfs",
     "cluster",
     "client",
     "http",
-    "api"
+    "api",
+    "node"
   ],
   "dependencies": {
     "axios": "^0.25.0",
