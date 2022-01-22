@@ -9,6 +9,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "eslint --fix \"src/**/*.{ts,tsx}\"",
     "build:release": "npm run clean && tsc --project ./tsconfig.release.json",
+    "test": "jest --coverage",
     "test:report": "sensible-browser ./coverage/lcov-report/index.html",
     "clean": "rm -rf dist"
   },

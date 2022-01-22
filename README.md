@@ -10,7 +10,7 @@ Adapted from https://github.com/nftstorage/ipfs-cluster.
 # Usage
 
 ```ts
-import { IpfsClusterClient } from '@cyphercider'
+import { IpfsClusterClient } from '@cyphercider/ipfs-cluster-http-client'
 
 const clusterClient = new IpfsClusterClient([ipfs swarm host], [optional username], [optional password])
 

@@ -2,6 +2,7 @@ import { URL } from 'url'
 import { IpfsClusterClient } from './ipfs-cluster.client'
 import { RequestOptions } from './types'
 import axios, { AxiosRequestConfig } from 'axios'
+import { Utils } from './utils'
 
 /**
  * streaming data with axios
@@ -42,7 +43,12 @@ export async function request(
     signal: options?.signal,
   }
 
-  const response = await axios(config)
+  try {
+    const response = await axios(config)
 
-  return response.data
+    return response.data
+  } catch (err) {
+    Utils.logAxiosError(err)
+    throw err
+  }
 }

@@ -86,12 +86,7 @@ export class IpfsClusterClient {
         size: item.size,
       }
     } catch (err: any) {
-      if (axios.isAxiosError(err)) {
-        console.error(`response ${err.message}`)
-        console.error(`status ${err.code}`)
-        console.error(err.response?.data)
-        console.error(err.response?.statusText)
-      }
+      Utils.logAxiosError(err)
       throw err
     }
   }
@@ -125,22 +120,27 @@ export class IpfsClusterClient {
     files: FileWithName[],
     options?: RequestOptions,
   ): Promise<AddDirectoryResponse> {
-    const body = new FormData()
+    const formData = new FormData()
 
     for (const f of files) {
-      body.append('file', f.contents, f.name)
+      formData.append('file', f.contents, f.name)
     }
 
-    const results = await request(this.clusterHost.href, 'add', this.constructHeaders(), {
-      params: {
-        ...Utils.encodeAddParams(options),
-        'stream-channels': false,
-        'wrap-with-directory': true,
+    const results = await request(
+      this.clusterHost.href,
+      'add',
+      this.constructHeaders(formData.getHeaders()),
+      {
+        params: {
+          ...Utils.encodeAddParams(options),
+          'stream-channels': false,
+          'wrap-with-directory': true,
+        },
+        method: 'POST',
+        body: formData,
+        signal: options?.signal,
       },
-      method: 'POST',
-      body,
-      signal: options?.signal,
-    })
+    )
 
     for (const f of results) {
       f.cid = f.cid['/']
