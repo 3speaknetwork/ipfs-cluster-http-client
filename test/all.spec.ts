@@ -93,22 +93,21 @@ describe('should operate', () => {
     it('adds a directory of files', async () => {
       const files = [
         TestUtils.getFileFromText('foo.txt', 'foo'),
-        TestUtils.getFileFromText('foo.txt', 'bar'),
+        TestUtils.getFileFromText('bar.txt', 'bar'),
       ]
       const [foo, bar, dir] = await clusterClient.addDirectory(files)
 
-      assert.equal(foo?.name, 'foo.txt')
-      assert.equal(foo?.size, 3)
-      assert.equal(foo?.cid, 'bafkreibme22gw2h7y2h7tg2fhqotaqjucnbc24deqo72b6mkl2egezxhvy')
+      expect(foo.name).toEqual('foo.txt')
+      expect(foo.size).toEqual(11)
+      expect(foo.cid).toEqual('QmcJw6x4bQr7oFnVnF6i8SLcJvhXjaxWvj54FYXmZ4Ct6p')
 
-      assert.equal(bar?.name, 'bar.txt')
-      assert.equal(bar?.size, 3)
-      assert.equal(bar?.cid, 'bafkreih43yvs5w5fnp2aqya7w4q75g24gogrb3sct2qe7lsvcg3i7p4pxe')
+      expect(bar.name).toEqual('bar.txt')
+      expect(bar.size).toEqual(11)
+      expect(bar.cid).toEqual('QmW3J3czdUzxRaaN31Gtu5T1U5br3t631b8AHdvxHdsHWg')
 
-      // (wrapper directory)
-      assert.equal(dir?.name, '')
-      assert.equal(dir?.size, 112)
-      assert.equal(dir?.cid, 'bafybeidhbfwu4j2zckkqd42azgxm7hlvjjqj7dunvv7o7c3avyrhgtvppm')
+      expect(dir.name).toEqual('')
+      expect(dir.size).toEqual(124)
+      expect(dir.cid).toEqual('QmNyPqRLaWHmqonxyLTWahvLeTfViBXiDRG5dn5qHh2iFK')
     })
   })
 

@@ -2,6 +2,7 @@ import { URLSearchParams } from 'url'
 import { IpfsClusterClient } from './ipfs-cluster.client'
 import { request } from './request.function'
 import { AddParams, PinOptions, PinResponse, RequestOptions } from './types'
+import axios from 'axios'
 
 export class Utils {
   /**
@@ -142,6 +143,15 @@ export class Utils {
       allocations: data.allocations,
       maxDepth: data.max_depth,
       reference: data.reference,
+    }
+  }
+
+  static logAxiosError(err: any) {
+    if (axios.isAxiosError(err)) {
+      console.error(`response ${err.message}`)
+      console.error(`status ${err.code}`)
+      console.error(err.response?.data)
+      console.error(err.response?.statusText)
     }
   }
 }
